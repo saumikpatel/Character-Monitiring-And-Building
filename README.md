@@ -7,3 +7,6 @@ then be used for self-monitoring, parental monitoring.
 
 made by using machine learning CNN model 
 Django framework
+
+
+see video for working project
