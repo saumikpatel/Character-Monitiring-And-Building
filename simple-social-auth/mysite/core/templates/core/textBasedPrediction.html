@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/pie.js"></script>
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        #imagebg {
+            margin-top: 10%;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        #textinput {
+            margin-top: 10%;
+        }
+
+        #message {
+            border-radius: 12px;
+            height: 40%;
+            width: 400px;
+        }
+
+        #sty {
+            font-size: 17px;
+        }
+
+        #stn {
+            margin-left: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper blue darken-3">
+            <a href="http://127.0.0.1:8000/settings/">
+                <i class="material-icons">arrow_back</i>
+            </a>
+            <a href="#" class="brand-logo center">
+                <h5>Character Monitoring And Building</h5>
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="#">Welcome, {{ user.get_full_name }}</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col l7 s12 ">
+                    {% load staticfiles %}
+                <img src="{% static "User_text.jpg" %}" id="imagebg">
+            </div>
+            <div class="col l3 s12 " id="textinput">
+                <form action="/newtext/" method="POST">
+                    {% csrf_token %}
+                    <div class="input-field col s12">
+                        <h5 id="sty">Tell us about yourself..</h5>
+                        <textarea id="message" name="message" required></textarea>
+                        <label for="message"></label>
+                    </div>
+                    <div class="row">
+                        <div class="col l3 s12">
+                            <center>
+                                <button type="submit" class="btn" value="Submit" id="stn">Submit</button>
+                            </center>
+                        </div>
+                    </div>
+                </form>
+            </div>
+</body>
+
+</html>

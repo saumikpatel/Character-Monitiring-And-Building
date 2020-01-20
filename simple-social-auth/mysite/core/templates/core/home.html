@@ -1,0 +1,1046 @@
+<html>
+
+
+
+<head>
+
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+  <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+
+
+
+  <script src="https://www.amcharts.com/lib/3/pie.js"></script>
+
+
+
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+
+
+
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Slab" rel="stylesheet">
+
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+
+  <script> zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];</script>
+
+  <style>
+    body {
+
+      font-family: 'Josefin Slab', serif;
+
+
+
+    }
+
+    .s2.card.small {
+
+      width: 17.5%;
+
+    }
+
+
+
+    #myChart {
+
+      height: 100%;
+
+      width: 100%;
+
+      min-height: 150px;
+
+    }
+
+    #charts {
+
+
+
+      width: 500px;
+
+
+
+      height: 500px;
+
+
+
+      position: relative;
+
+
+
+      font-size: 8px;
+
+
+
+    }
+
+
+
+    .dark {
+
+
+
+      color: #333;
+
+      font-size: 25px;
+
+
+
+    }
+
+
+
+    .chartdiv {
+
+
+
+      width: 500px;
+
+
+
+      height: 500px;
+
+
+
+      position: absolute;
+
+
+
+      top: 0;
+
+
+
+      left: 0;
+
+
+
+    }
+
+
+
+    #name {
+
+
+
+      margin-top: -5%;
+
+      margin-right: 2%;
+
+
+
+    }
+
+
+
+    #line {
+
+
+
+      line-height: 2.1;
+
+
+
+    }
+
+
+
+    nav {
+
+
+
+      margin-top: -15px;
+
+
+
+    }
+
+
+
+    .arrow {
+
+      margin-left: 2%;
+
+    }
+
+    .card.small {
+
+      height: 40%;
+
+    }
+  </style>
+
+
+
+</head>
+
+
+
+
+
+
+
+<body>
+
+
+
+  {% block content %}
+
+
+
+  <nav>
+
+
+
+    <div class="nav-wrapper blue darken-3">
+
+
+
+      <a href="http://127.0.0.1:8000/settings/" class="left arrow">
+
+        <i class="material-icons">keyboard_backspace</i>
+
+      </a>
+
+
+
+      <a href="#" class="center">
+
+        <h5 id="line">Character Monitoring And Building</h5>
+
+      </a>
+
+
+
+      <b id="name" class="right">
+         {{ user.get_full_name }} </b>
+
+
+
+    </div>
+
+
+
+  </nav>
+
+
+
+  <div class="container">
+
+
+
+    <div class="row">
+
+
+
+      <div class="col l12 s12 card-panel">
+
+
+
+        <center>
+
+
+
+          <div id="charts">
+
+
+
+            <div id="chart1" class="chartdiv"></div>
+
+
+
+            <div id="chart2" class="chartdiv"></div>
+
+
+
+            <div id="chart3" class="chartdiv"></div>
+
+
+<!-- ASK YAGNESH -->
+            <!-- <div id="chart4" class="chartdiv"></div>   -->
+
+
+
+          </div>
+
+
+
+        </center>
+
+
+
+      </div>
+
+      <div class="col s12">
+
+        <div id="myChart"></div>
+
+      </div>
+
+      <div class="row">
+
+
+
+        <div class="col s2 card small" style="margin-left:5%; ">
+
+          <center>
+
+            <br>
+
+            <br>
+
+            <b>
+              <label class="dark">Most Used Emoji :</label>
+            </b>
+            <br>
+
+            <br>
+
+
+
+            <label class="dark">
+              {{ emoji }} </label>
+
+          </center>
+
+        </div>
+
+        <div class="col s1"></div>
+
+
+
+        <div class="col s2 card small">
+
+          <center>
+
+            <br>
+
+            <br>
+
+            <b>
+              <label class="dark">Total Bad Words Used :</label>
+            </b>
+            <br>
+
+
+
+            <label class="dark">
+              {{badWordsCount}} 
+            </label>
+
+          </center>
+
+        </div>
+
+        <div class="col s1"></div>
+
+        <div class="col s2 card small">
+
+          <center>
+
+            <br>
+
+            <br>
+
+            <b>
+              <label class="dark">Total Positive Comments :</label>
+            </b>
+            <br>
+            <br>
+
+
+
+            <label class="dark">
+             {{ pos }}</label>
+
+          </center>
+
+        </div>
+
+        <div class="col s1"></div>
+
+        <div class="col s2 card small">
+
+          <center>
+
+            <br>
+
+            <br>
+
+            <b>
+              <label class="dark">Total Negative Comments :</label>
+            </b>
+
+
+
+            <label class="dark">{{ neg }}</label>
+
+          </center>
+
+          </div>
+
+        </div>
+
+        <div class="row ">
+
+        <div class="col s12 card-panel ">
+
+        <h4><blockquote>{{ summary }}</blockquote></h4>
+
+      </div>
+
+       <div class="row ">
+
+      <div class="col s5 card-panel " > <center><label class="dark "><b><h2>Likes:</h2></b><br><br>  {{likes}} </label></center></div>
+
+      <div class="col s2 " ></div>
+
+       <div class="col s5 card-panel "><center><label class="dark "><b> <h2>Hates:</h2></b><br><br>  {{ dislikes }} </label></center></div>
+
+      </div>
+
+      <div class="row ">
+
+         <div class="col s5 card-panel " > <center>
+
+      <b><label class="dark ">Top Positive Comment :</label></b>
+
+      <br>
+
+      <label class="dark">
+              {{ positiveTweets }} </label>
+
+            <br>
+
+          </center>
+
+        </div>
+
+        <div class="col s2"></div>
+
+        <div class="col s5 card-panel ">
+          <center>
+
+            <b>
+
+              <label class="dark">Top Negative Comment :</label>
+
+            </b>
+
+            <br>
+
+            <label class="dark">
+             {{ negativeTweets }} </label>
+
+            <br>
+
+          </center>
+
+        </div>
+
+      </div>
+
+
+
+
+
+      <div class="row">
+
+
+
+        <div class="col s2 card small" style="margin-left:5%; ">
+
+          <center>
+
+            <br>
+
+            <h1>
+               {{achievement}} 
+            </h1>
+
+            <label class="dark">
+
+              <b>Achievement</b>
+
+              <br>
+
+            </label>
+
+          </center>
+
+        </div>
+
+        <div class="col s1"></div>
+
+
+
+        <div class="col s2 card small">
+
+          <center>
+
+            <br>
+
+            <h1>
+               {{alcohol}} </h1>
+
+            <label class="dark">
+
+              <b>Alcohol:</b>
+
+              <br>
+
+            </label>
+
+          </center>
+
+        </div>
+
+        <div class="col s1"></div>
+
+        <div class="col s2 card small">
+
+          <center>
+
+            <br>
+
+            <h1> 
+               {{clothing}} 
+            </h1>
+
+            <label class="dark">
+
+              <b>Clothing:</b>
+
+              <br>
+
+            </label>
+
+          </center>
+
+        </div>
+
+        <div class="col s1"></div>
+
+        <div class="col s2 card small">
+
+          <center>
+
+            <br>
+
+            <h1> 
+               {{cooking}}
+            </h1>
+
+            <label class="dark">
+
+              <b>Cooking:</b>
+
+              <br>
+
+            </label>
+
+          </center>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+
+
+
+        <div class="col s2 card small" style="margin-left:5%; ">
+
+          <center>
+
+            <br>
+            <h1>
+               {{family}}
+            </h1>
+
+            <label class="dark">
+
+              <b>Family:</b>
+
+
+
+            </label>
+
+          </center>
+
+        </div>
+
+        <div class="col s1"></div>
+
+
+
+        <div class="col s2 card small">
+
+          <center>
+
+            <br>
+
+            <h1>
+              {{government}} </h1>
+
+            <label class="dark">
+
+              <b>Government:</b>
+
+
+
+            </label>
+
+          </center>
+
+        </div>
+
+        <div class="col s1"></div>
+
+        <div class="col s2 card small">
+
+          <center>
+
+            <br>
+
+            <h1>
+               {{party}}</h1>
+
+            <label class="dark">
+
+              <b>Party:</b>
+
+
+
+            </label>
+
+          </center>
+
+        </div>
+
+        <div class="col s1"></div>
+
+        <div class="col s2 card small">
+
+          <center>
+
+            <br>
+
+            <h1>
+              {{music}} </h1>
+
+            <label class="dark">
+
+              <b>Music:</b>
+
+            </label>
+
+          </center>
+
+        </div>
+
+      </div>
+
+      <div class="card-panel ">
+        <center>
+
+          <label class="dark">
+            <br>
+
+            <h1>
+               {{programming}}
+            </h1>
+
+            <b>Programming:</b>
+
+          </label>
+        </center>
+
+      </div>
+
+      <div class="card-panel ">
+        <center>
+
+          <label class="dark">
+            <br>
+
+            <h1>
+               {{science}} </h1>
+
+            <b>Science:</b>
+
+          </label>
+        </center>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col s5">
+
+          <div class="card small">
+            <center>
+
+              <label class="dark">
+                <br>
+                <br>
+
+                <b>Bad Word Percent</b>
+                <br>
+                 {{percent}} 
+
+              </label>
+            </center>
+
+          </div>
+
+        </div>
+
+        <div class="col s2"></div>
+
+        <div class="col s5">
+
+          <div class="card small">
+            <center>
+
+              <label class="dark">
+                <br>
+
+                <b> Maximum used words:</b>
+                <br>
+              {{ maximum}} 
+                <br>
+                <br>
+              </label>
+            </center>
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class="row ">
+
+          <div class="col s12 card-panel ">
+  
+          <h4><blockquote>{% for i in steps %} {{ i }}<br> {% endfor %}</blockquote></h4>
+  
+        </div>
+        <div class="row ">
+
+            <div class="col s12 card-panel ">
+    
+            <h4><blockquote>Badword Summary: {% for i in badWordsSummary %} {{ i }}<br> {% endfor %}</blockquote></h4>
+    
+          </div>
+        
+    </div>
+
+
+
+  </div>
+
+
+
+
+  <!--  <h2>Homepage</h2>
+  <p><strong> Emoji Count: </strong> {{ emoji }}</p>
+  <p><strong>Movie Summary: </strong> {{ MovieSummary }}</p>
+  <p><strong>Summary: </strong></p>
+  <p><strong>Bad Words Count:</strong> {{badWordsCount}}</p>
+  <p><strong>Percent:</strong> {{percent}}</p> 
+  <p><strong>Maximum:</strong> {{maximum}}</p> 
+  <p><strong>Positive Tweets: </strong> {{ positiveTweets }}<strong> Negative Tweets: </strong> {{ negativeTweets }}</p>
+   
+  <p><strong>Positive: </strong> {{ pos }}<strong> Negative: </strong> {{ neg }}</p>
+  <p><strong>Likes:</strong> {{likes}}<strong> Hates:</strong> {{ dislikes }} </p> -->
+
+
+  <!-- {% load staticfiles %}
+    <script src="{% static "Customchart.js" %}" type="text/javascript"></script> -->
+  <script>
+    AmCharts.addInitHandler(function (chart) {
+
+      // init holder for nested charts
+      if (AmCharts.nestedChartHolder === undefined)
+        AmCharts.nestedChartHolder = {};
+
+      if (chart.bringToFront === true) {
+        chart.addListener("init", function (event) {
+          // chart inited
+          var chart = event.chart;
+          var div = chart.div;
+          var parent = div.parentNode;
+
+          // add to holder
+          if (AmCharts.nestedChartHolder[parent] === undefined)
+            AmCharts.nestedChartHolder[parent] = [];
+          AmCharts.nestedChartHolder[parent].push(chart);
+
+          // add mouse mouve event
+          chart.div.addEventListener('mousemove', function () {
+
+            // calculate current radius
+            var x = Math.abs(chart.mouseX - (chart.realWidth / 2));
+            var y = Math.abs(chart.mouseY - (chart.realHeight / 2));
+            var r = Math.sqrt(x * x + y * y);
+
+            // check which chart smallest chart still matches this radius
+            var smallChart;
+            var smallRadius;
+            for (var i = 0; i < AmCharts.nestedChartHolder[parent].length; i++) {
+              var checkChart = AmCharts.nestedChartHolder[parent][i];
+
+              if ((checkChart.radiusReal < r) || (smallRadius < checkChart.radiusReal)) {
+                checkChart.div.style.zIndex = 1;
+              }
+              else {
+                if (smallChart !== undefined)
+                  smallChart.div.style.zIndex = 1;
+                checkChart.div.style.zIndex = 2;
+                smallChart = checkChart;
+                smallRadius = checkChart.radiusReal;
+              }
+
+            }
+          }, false);
+        });
+      }
+
+    }, ["pie"]);
+
+    /**
+     * Create the charts
+     */
+    AmCharts.makeChart("chart1", {
+      "type": "pie",
+      "bringToFront": true,
+      "dataProvider": [{
+        "title": "$",
+        "value": 100,
+        "color": "#090E0F"
+      }],
+      "startDuration": 0,
+      "pullOutRadius": 0,
+      "color": "#fff",
+      "fontSize": 14,
+      "titleField": "title",
+      "valueField": "value",
+      "colorField": "color",
+      "labelRadius": 20,
+      "labelColor": "#fff",
+      "radius": 25,
+      "innerRadius": 0,
+      "labelText": "[[title]]",
+      "balloonText": "[[title]]: [[value]]"
+    });
+
+    AmCharts.makeChart("chart2", {
+      "type": "pie",
+      "bringToFront": true,
+      "dataProvider": [{
+        "title": "Surprise",
+        "value": {{ surprise }},
+      "color": "#BA3233"
+      }, {
+        "title": "Happiness",
+        "value": {{ happiness }},
+      "color": "#624B6A"
+      }, {
+        "title": "Love",
+        "value": {{ love }},
+      "color": "orange"
+      },
+      {
+        "title": "Sad",
+        "value": {{ sad }},
+      "color": "green"
+      },
+      {
+        "title": "Worry",
+        "value": {{ worry }},
+      "color": "#3d3d3d"
+      },
+      {
+        "title": "Hate",
+        "value": {{ hate }},
+      "color": "#ddd"
+      },
+      {
+        "title": "Fear",
+        "value": {{ fear }},
+      "color": "#039be5"
+      },
+      {
+        "title": "Anger",
+        "value": {{ anger }},
+      "color": "#333"
+      }],
+      "startDuration": 1,
+      "pullOutRadius": 0,
+      "color": "#fff",
+      "fontSize": 12,
+      "titleField": "title",
+      "valueField": "value",
+      "colorField": "color",
+      "labelRadius": -40,
+      "labelColor": "#fff",
+      "radius": 148,
+      "innerRadius": 27,
+      "outlineAlpha": 1,
+      "outlineThickness": 4,
+      "labelText": "[[title]]",
+      "balloonText": "[[title]]: [[value]]"
+    });
+
+    AmCharts.makeChart("chart3", {
+      "type": "pie",
+      "bringToFront": true,
+      "dataProvider": [{
+        "title": "Openness",
+        "value": {{ opennesspositive }},
+      "color": "orange"
+      }, {
+        "title": "Conscientiousness",
+        "value": {{conscientiousnesspositive}},
+        "color": "#BA3233"
+      }, {
+        "title": "Extroversion",
+        "value": {{extrovertpositive}},
+        "color": "green"
+      }, {
+        "title": "Agreeableness",
+        "value": {{aggreablepositive}},
+        "color": "#333"
+      }, {
+        "title": "Neuroticism",
+        "value": {{neuroticpositive}},
+        "color": "#624B6A"
+      }],
+      "startDuration": 1,
+      "pullOutRadius": 0,
+      "color": "#fff",
+      "fontSize": 12,
+      "titleField": "title",
+      "valueField": "value",
+      "colorField": "color",
+      "labelRadius": -57,
+      "labelColor": "#fff",
+      "radius": 250,
+      "innerRadius": 150,
+      "outlineAlpha": 1,
+      "outlineThickness": 4,
+      "labelText": "[[title]]",
+      "balloonText": "[[title]]: [[value]]"
+    });
+  </script>
+  <script>
+    var myConfig = {
+
+      type: 'hbar',
+
+      plot: {
+
+        stacked: true
+
+      },
+
+      legend: {},
+
+      tooltip: {
+
+        text: '<br> value: %v',
+
+        textAlign: 'left'
+
+      },
+
+      scaleX: {
+
+        labels: ['O', 'C', 'E', 'A', 'N']
+
+      },
+
+      scaleY: {
+
+        minValue: 0,
+
+        maxValue: 100,
+
+        step: 5,
+
+        decimals: 1
+
+      },
+
+      series: [
+
+        {
+// <!-- POSITIVE -->
+          values: [{{ opennesspositive }}, {{conscientiousnesspositive}}, {{extrovertpositive}}, {{aggreablepositive}}, {{neuroticpositive}}],
+
+          offsetValues: [50, 50, 50, 50, 50],
+
+          backgroundColor: '#039be5',
+          valueBox: {
+            placement: 'bottom',
+            rules: [
+              {
+
+                rule: '%offset-values == 0',
+
+                visible: false
+              }
+            ]
+          }
+        },
+        {
+          // NEGATIVE
+          values: [-{{opennessnegative}}, -{{conscientiousnessnegative}}, -{{extrovertnegative}}, -{{aggreablenegative}}, -{{neuroticnegative}}],
+
+          offsetValues: [50, 50, 50, 50, 50],
+
+          backgroundColor: '#ddd',
+
+          valueBox: {
+
+
+
+          }
+
+        }
+
+      ]
+
+    };
+
+
+
+    zingchart.render({
+
+      id: 'myChart',
+
+      data: myConfig,
+
+      height: '100%',
+
+      width: '100%'
+
+    });
+  </script>
+</body>
+
+</html>
+{% endblock %}

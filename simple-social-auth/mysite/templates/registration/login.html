@@ -1,0 +1,58 @@
+<html>
+
+<head>
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">	
+
+  <style type="text/css">
+
+  	 .bg
+
+    {
+
+      background: #039be5;
+
+    }
+
+    .btn
+
+    {
+
+      margin-top: 5%;
+
+    }
+	.c{
+		background: #039be5;
+	}
+  </style>
+
+</head>
+
+<body class="bg">
+
+<center >
+
+<div class="container card-panel">
+
+<h1> Character Monitoring and Building</h1>
+
+<form action="/mytest/" method="POST" id="form1">
+  {% csrf_token %}
+
+  <input type="text" id="message" name="message" placeholder="Enter you twitter handler">
+  <button class="btn c" type="submit" >Submit</button>
+
+</form>
+  <a type="button" class="btn c"  href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a>
+
+</div>
+
+</center>
+
+</body>
+
+</html>

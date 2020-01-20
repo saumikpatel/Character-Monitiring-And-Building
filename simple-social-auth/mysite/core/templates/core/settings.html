@@ -1,0 +1,359 @@
+<html>
+
+<head>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style>
+    .bg {
+
+      background: #039be5;
+
+    }
+
+    #designbtn {
+
+      width: 30%;
+
+      height: 7%;
+
+      background: #039be5;
+
+    }
+
+    .card-panel {
+
+      border-radius: 12px;
+
+    }
+
+    .animated {
+
+      -webkit-animation-duration: 1s;
+
+      animation-duration: 1s;
+
+      -webkit-animation-fill-mode: both;
+
+      animation-fill-mode: both;
+
+    }
+
+    -webkit-keyframes bounceInDown {
+
+      from,
+
+      60%,
+
+      75%,
+
+      90%,
+
+      to {
+
+        -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+      }
+
+
+
+      0% {
+
+        opacity: 0;
+
+        -webkit-transform: translate3d(0, -3000px, 0);
+
+        transform: translate3d(0, -3000px, 0);
+
+      }
+
+
+
+      60% {
+
+        opacity: 1;
+
+        -webkit-transform: translate3d(0, 25px, 0);
+
+        transform: translate3d(0, 25px, 0);
+
+      }
+
+
+
+      75% {
+
+        -webkit-transform: translate3d(0, -10px, 0);
+
+        transform: translate3d(0, -10px, 0);
+
+      }
+
+
+
+      90% {
+
+        -webkit-transform: translate3d(0, 5px, 0);
+
+        transform: translate3d(0, 5px, 0);
+
+      }
+
+
+
+      to {
+
+        -webkit-transform: translate3d(0, 0, 0);
+
+        transform: translate3d(0, 0, 0);
+
+      }
+
+    }
+
+
+
+    @keyframes bounceInDown {
+
+      from,
+
+      60%,
+
+      75%,
+
+      90%,
+
+      to {
+
+        -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+      }
+
+
+
+      0% {
+
+        opacity: 0;
+
+        -webkit-transform: translate3d(0, -3000px, 0);
+
+        transform: translate3d(0, -3000px, 0);
+
+      }
+
+
+
+      60% {
+
+        opacity: 1;
+
+        -webkit-transform: translate3d(0, 25px, 0);
+
+        transform: translate3d(0, 25px, 0);
+
+      }
+
+
+
+      75% {
+
+        -webkit-transform: translate3d(0, -10px, 0);
+
+        transform: translate3d(0, -10px, 0);
+
+      }
+
+
+
+      90% {
+
+        -webkit-transform: translate3d(0, 5px, 0);
+
+        transform: translate3d(0, 5px, 0);
+
+      }
+
+
+
+      to {
+
+        -webkit-transform: translate3d(0, 0, 0);
+
+        transform: translate3d(0, 0, 0);
+
+      }
+
+    }
+
+    #locate {
+
+      margin-top: 10%;
+
+    }
+
+    .bounceInDown {
+
+      -webkit-animation-name: bounceInDown;
+
+      animation-name: bounceInDown;
+
+    }
+
+
+
+    @-webkit-keyframes bounceInLeft {
+
+      from,
+
+      60%,
+
+      75%,
+
+      90%,
+
+      to {
+
+        -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+      }
+
+
+
+      0% {
+
+        opacity: 0;
+
+        -webkit-transform: translate3d(-3000px, 0, 0);
+
+        transform: translate3d(-3000px, 0, 0);
+
+      }
+
+
+
+      60% {
+
+        opacity: 1;
+
+        -webkit-transform: translate3d(25px, 0, 0);
+
+        transform: translate3d(25px, 0, 0);
+
+      }
+
+
+
+      75% {
+
+        -webkit-transform: translate3d(-10px, 0, 0);
+
+        transform: translate3d(-10px, 0, 0);
+
+      }
+
+
+
+      90% {
+
+        -webkit-transform: translate3d(5px, 0, 0);
+
+        transform: translate3d(5px, 0, 0);
+
+      }
+
+
+
+      to {
+
+        -webkit-transform: translate3d(0, 0, 0);
+
+        transform: translate3d(0, 0, 0);
+
+      }
+
+    }
+  </style>
+
+</head>
+
+<body class="bg">
+
+
+
+  {% block content %}
+
+
+
+  <center>
+    {% load staticfiles %}
+    <div class="container card-panel animated bounceInDown" id="locate">
+
+      <div class="col s12">
+
+        <img src="{% static "1.jpg" %}" height="200px" width="200px" alt="Heya" class="circle responsive-img">
+        <!-- notice the "circle" class -->
+
+      </div>
+
+
+
+      {% if twitter_login %}
+
+      <b>{{ user.get_full_name }}</b>
+      <p>
+
+        <a href="https://twitter.com/{{ twitter_login.extra_data.access_token.screen_name }}/" target="_blank">@{{ twitter_login.extra_data.access_token.screen_name }}</a>
+
+      </p>
+
+      <a class="btn" id="designbtn" href="{% url 'home' %}">Generate Personality Graph</a>
+      <br>
+      <br>
+
+      <a class="btn" id="designbtn" href="{% url 'shashank' %}">Text Based Prediction</a>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br> {% if can_disconnect %}
+
+      <form method="post" action="{% url 'social:disconnect' 'twitter' %}">
+
+        {% csrf_token %}
+
+        <button class="btn" style="background: #039be5;" type="submit">Logout</button>
+
+      </form>
+
+      {% else %}
+
+      <button class="btn" type="button" disabled>Disconnect from Twitter</button>
+
+      <p style="color: red">You must
+
+        <a href="{% url 'password' %}">define a password</a> for your account before disconnecting from Twitter.</p>
+
+      {% endif %} {% else %}
+
+      <a class="btn" href="{% url 'social:begin' 'twitter' %}">Connect to Twitter</a>
+
+      {% endif %} {% endblock %}
+
+    </div>
+
+  </center>
+
+</body>
+
+</html>

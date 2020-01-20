@@ -1,0 +1,139 @@
+<html>
+
+<head>
+
+		<script src= "https://cdn.zingchart.com/zingchart.min.js"></script>
+
+		<script> zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+
+		ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9","ee6b7db5b51705a13dc2339db3edaf6d"];</script>
+
+<style>
+
+html, body {
+
+	height:100%;
+
+	width:100%;
+
+	margin:20;
+
+	padding:0;
+
+}
+
+#myChart {
+
+	height:100%;
+
+	width:100%;
+
+	min-height:150px;
+
+}
+
+</style>
+
+	</head>
+
+<body><div id="myChart"></div>
+
+	<script>
+
+		var myConfig = {
+
+ 	type: 'hbar', 
+
+ 	plot: {
+
+ 	  stacked: true
+
+ 	},
+
+ 	legend: {},
+
+ 	tooltip: {
+
+ 	  text: '<br> value: %v',
+
+ 	  textAlign: 'left'
+
+ 	},
+
+ 	scaleX: {
+
+ 	  labels: ['O', 'C', 'E', 'A', 'N']
+
+ 	},
+
+ 	scaleY: {
+
+ 	  minValue: 0,
+
+ 	  maxValue: 100,
+
+ 	  step: 5,
+
+ 	  decimals: 1
+
+ 	},
+
+	series: [
+
+		{
+
+			values: [10,45,23,12,8],
+
+			offsetValues: [50,50,50,50,50],
+
+			backgroundColor: '#039be5',
+			valueBox: {
+			  placement: 'bottom',
+			  rules: [
+			    {
+
+			      rule: '%offset-values == 0',
+
+			      visible: false
+			    }  
+			  ]
+			}
+		},
+		{
+			values: [-10,-8.0,-25,-4.0,-35],
+
+			offsetValues: [50,50,50,50,50],
+
+			backgroundColor: '#ddd',
+
+			valueBox: {
+
+			  
+
+			}
+
+		}
+
+	]
+
+};
+
+
+
+zingchart.render({ 
+
+	id: 'myChart', 
+
+	data: myConfig, 
+
+	height: '100%', 
+
+	width: '100%' 
+
+});
+
+	</script>
+
+	</body>
+
+	</html>
